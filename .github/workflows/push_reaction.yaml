@@ -1,10 +1,12 @@
 name: Push Notification
 
-on:[push]
+on:
+  push:
+    branches: [ "main" ]
 
 jobs:
-    notification:
-            runs-on: ubuntu-latest
-            steps:
-                 - name: Notify Success
-            run: echo "Push successful!"
+  build:
+    runs-on: ubuntu-latest
+    steps:
+       - name: Notify Success
+         run: echo "Push successful!"
