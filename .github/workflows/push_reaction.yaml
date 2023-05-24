@@ -1,0 +1,10 @@
+name: Push Notification
+
+on:[push]
+
+jobs:
+    notification:
+            runs-on: ubuntu-latest
+            steps:
+                 - name: Notify Success
+            run: echo "Push successful!"
