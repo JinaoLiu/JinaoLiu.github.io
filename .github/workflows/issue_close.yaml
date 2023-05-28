@@ -13,11 +13,11 @@ on:
       days-before-stale:
         description: 'days-before-stale'     
         required: false
-        default: 180
+        default: 1
       days-before-close:
         description: 'days-before-close'     
         required: false
-        default: 14
+        default: 1
       exempt-issue-labels:
         description: 'exempt-issue-labels'     
         required: false
@@ -34,8 +34,8 @@ permissions:
 env:
   DEFAULT_DEBUG_ONLY: true
   DEFAULT_MAX_OPS: 3000
-  DEFAULT_DAYS_BEFORE_STALE: 180
-  DEFAULT_DAYS_BEFORE_CLOSE: 14
+  DEFAULT_DAYS_BEFORE_STALE: 1
+  DEFAULT_DAYS_BEFORE_CLOSE: 1
   DEFAULT_EXEMPT_ISSUE_LABELS: 'type: feature,type: enhancement,routed-to-e2e,routed-to-ct,routed-to-tools,routed-to-cloud,prevent-stale,triaged'
   DEFAULT_EXEMPT_PR_LABELS: 'type: feature,type: enhancement,prevent-stale,triaged'
 jobs:
