@@ -23,25 +23,38 @@ tags:
 
 ## &#x1F680;&#x1F680;&#x1F680;我的练习
 
-我设计的功能是: 7天内不活跃的issue将会被关闭, 以下是代码实现.
+我设计的功能是: 30天内不活跃的issue将会被关闭. 
+
+这里为了测试方便, 将时间改为1天. 如下图所示, 当issue超过30天不活跃, 则会被打上stale的标签, 并提醒该issue. 在被打上stale标签之后的30天后, 将自动关闭该issue.
+
+![image-20230530140733884](images/2023-05-24-GitHub Actions使用/image-20230530140733884.png)
+
+![image-20230530140756095](images/2023-05-24-GitHub Actions使用/image-20230530140756095.png)
+
+**以下是代码实现.**
 
 ```yaml
-name: Issue Close
-
+name: Close inactive issues
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "30 1 * * *"
 
 jobs:
   close-issues:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
     steps:
-      - name: close-issues
-        uses: actions-cool/issues-helper@v1.7
+      - uses: actions/stale@v5
         with:
-          actions: 'close-issues'
-          token: ${{ secrets.GITHUB_TOKEN }}
-          inactive-day: 7
+          days-before-issue-stale: 30
+          days-before-issue-close: 30
+          stale-issue-label: "stale"
+          stale-issue-message: "This issue is stale because it has been open for 30 days with no activity."
+          close-issue-message: "This issue was closed because it has been inactive for 14 days since being marked as stale."
+          days-before-pr-stale: -1
+          days-before-pr-close: -1
 ```
 
 
